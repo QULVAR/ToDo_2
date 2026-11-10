@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - glass_bottom_navigation (0.1.0):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - glass_bottom_navigation (from `.symlinks/plugins/glass_bottom_navigation/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  glass_bottom_navigation:
+    :path: ".symlinks/plugins/glass_bottom_navigation/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 71a624a5bc0c04062bf19101d501e466baf2fb47
+  glass_bottom_navigation: 7e91c2abc46bc98c4fe8ffcbef4377bb29ed7197
+
+PODFILE CHECKSUM: 3ba3a73b1b12adcf321a227a745625fe0888cc82
+
+COCOAPODS: 1.17.0

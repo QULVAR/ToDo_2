@@ -1,0 +1,66 @@
+# Dart / Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+build/
+coverage/
+**/doc/api/
+**/ios/Flutter/.last_build_id
+
+# Flutter generated files
+**/flutter/ephemeral/
+**/flutter/generated_plugin_registrant.*
+**/flutter/generated_plugins.cmake
+**/Flutter/ephemeral/
+**/Flutter/Generated.xcconfig
+**/Flutter/flutter_export_environment.sh
+**/Flutter/Flutter.podspec
+**/Flutter/GeneratedPluginRegistrant.swift
+**/Runner/GeneratedPluginRegistrant.*
+**/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+
+# Android
+**/android/local.properties
+**/android/key.properties
+**/android/.gradle/
+*.jks
+*.keystore
+
+# iOS / macOS / Xcode
+**/Pods/
+**/.symlinks/
+**/xcuserdata/
+**/*.xcuserstate
+**/DerivedData/
+**/.swiftpm/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# macOS / OS files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.pyc
+.history/
+.buildlog/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Flutter debug symbols
+app.*.symbols
+app.*.map.json
