@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:todolist/main.dart';
-import 'package:todolist/screens/main_screen/main_screen.dart';
 
 void main() {
   testWidgets('dashboard starts on folders', (tester) async {
@@ -14,26 +13,17 @@ void main() {
   });
 
   testWidgets('task mode button is only shown on tasks', (tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: MainScreen(
-          pages: const [
-            MainScreenPage.folders,
-            MainScreenPage.lists,
-            MainScreenPage.tasks,
-          ],
-          onOpenLists: () {},
-          onOpenTasks: () {},
-          onPageRemoved: (_) {},
-          taskTapOpensProperties: false,
-          onTaskTapModePressed: () {},
-          onOpenTaskProperties: () {},
-        ),
-      ),
-    );
+    await tester.pumpWidget(const MyApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('List'), findsOneWidget);
+    expect(find.byTooltip('Task tap completes task'), findsNothing);
+
+    await tester.tap(find.text('test-lists'));
+    await tester.pumpAndSettle();
+    expect(find.byTooltip('Task tap completes task'), findsNothing);
+
+    await tester.tap(find.text('test-tasks'));
+    await tester.pumpAndSettle();
     expect(find.byTooltip('Task tap completes task'), findsOneWidget);
   });
 

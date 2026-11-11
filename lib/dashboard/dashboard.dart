@@ -1,42 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../screens/main_screen/main_screen.dart';
-import '../screens/tasks/properties/view.dart';
+import '../screens/main_screen/bloc/main_screen_bloc.dart';
+import '../screens/main_screen/view.dart';
+import '../screens/tasks/properties/properties.dart';
 
-class Dashboard extends StatefulWidget {
+class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
 
-  @override
-  State<Dashboard> createState() => _DashboardState();
-}
-
-class _DashboardState extends State<Dashboard> {
-  final List<MainScreenPage> _pages = [MainScreenPage.folders];
-  bool _taskTapOpensProperties = false;
-
-  void _openPage(MainScreenPage page) {
-    if (_pages.last == page) return;
-    setState(() => _pages.add(page));
-  }
-
-  void _removePage(MainScreenPage page) {
-    if (page == MainScreenPage.folders || !_pages.contains(page)) return;
-
-    setState(() {
-      _pages.remove(page);
-      if (page == MainScreenPage.tasks) {
-        _taskTapOpensProperties = false;
-      }
-    });
-  }
-
-  void _toggleTaskTapMode() {
-    setState(() {
-      _taskTapOpensProperties = !_taskTapOpensProperties;
-    });
-  }
-
-  void _openTaskProperties() {
+  void _openTaskProperties(BuildContext context) {
     Navigator.of(context, rootNavigator: true).push<void>(
       PageRouteBuilder<void>(
         opaque: false,
@@ -69,17 +41,15 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: MainScreen(
-          pages: _pages,
-          onOpenLists: () => _openPage(MainScreenPage.lists),
-          onOpenTasks: () => _openPage(MainScreenPage.tasks),
-          onPageRemoved: _removePage,
-          taskTapOpensProperties: _taskTapOpensProperties,
-          onTaskTapModePressed: _toggleTaskTapMode,
-          onOpenTaskProperties: _openTaskProperties,
+    return BlocProvider(
+      create: (context) => MainScreenBloc(),
+      child: BlocListener<MainScreenBloc, MainScreenState>(
+        listenWhen: (previous, current) =>
+            previous.taskPropertiesRequestId != current.taskPropertiesRequestId,
+        listener: (context, state) => _openTaskProperties(context),
+        child: const Scaffold(
+          backgroundColor: Colors.black,
+          body: SafeArea(child: MainScreen()),
         ),
       ),
     );
